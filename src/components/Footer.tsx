@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -19,15 +20,15 @@ export default function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold text-zinc-900">Navigasi</h4>
             <ul className="space-y-2 text-sm text-zinc-600">
-              <li><a href="/" className="hover:text-zinc-900">Beranda</a></li>
-              <li><a href="/about" className="hover:text-zinc-900">Tentang</a></li>
-              <li><a href="/berita-acara" className="hover:text-zinc-900">Berita Acara</a></li>
-              <li><a href="/pengurus" className="hover:text-zinc-900">Pengurus</a></li>
-              <li><a href="/tupoksi" className="hover:text-zinc-900">Tupoksi</a></li>
-              <li><a href="/surat-keputusan" className="hover:text-zinc-900">Surat Keputusan</a></li>
-              <li><a href="/services" className="hover:text-zinc-900">Layanan</a></li>
-              <li><a href="/majalah-terompet" className="hover:text-zinc-900">Majalah Terompet</a></li>
-              <li><a href="/contact" className="hover:text-zinc-900">Kontak</a></li>
+              <li><Link href="/" className="hover:text-zinc-900">Beranda</Link></li>
+              <li><Link href="/about" className="hover:text-zinc-900">Tentang</Link></li>
+              <li><Link href="/berita-acara" className="hover:text-zinc-900">Berita Acara</Link></li>
+              <li><Link href="/pengurus" className="hover:text-zinc-900">Pengurus</Link></li>
+              <li><Link href="/tupoksi" className="hover:text-zinc-900">Tupoksi</Link></li>
+              <li><Link href="/surat-keputusan" className="hover:text-zinc-900">Surat Keputusan</Link></li>
+              <li><Link href="/services" className="hover:text-zinc-900">Layanan</Link></li>
+              <li><Link href="/majalah-terompet" className="hover:text-zinc-900">Majalah Terompet</Link></li>
+              <li><Link href="/contact" className="hover:text-zinc-900">Kontak</Link></li>
             </ul>
           </div>
           <div>

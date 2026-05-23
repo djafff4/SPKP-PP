@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import pool from "@/lib/db";
-import { RowDataPacket } from "mysql2";
 
 export const metadata: Metadata = {
   title: "Majalah Terompet | SPKP-PP",
   description: "Arsip digital Majalah Terompet, media informasi dan aspirasi Serikat Pekerja Kelautan dan Perikanan Perisai Pancasila.",
 };
 
-interface Magazine extends RowDataPacket {
+interface Magazine {
   id: number;
   title: string;
   slug: string;
@@ -20,8 +19,9 @@ interface Magazine extends RowDataPacket {
 
 async function getMagazines() {
   try {
-    const [rows] = await pool.query<Magazine[]>("SELECT * FROM majalah ORDER BY release_date DESC");
-    return rows;
+    // We cast to any here to avoid importing types from mysql2 in this file
+    const [rows] = await pool.query("SELECT * FROM majalah ORDER BY release_date DESC") as any;
+    return rows as Magazine[];
   } catch (error) {
     console.error("Database error:", error);
     return [];
