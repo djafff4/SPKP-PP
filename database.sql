@@ -1,6 +1,10 @@
 -- SQL Migration Script for SPKP-PP Majalah Terompet
 -- Run this in Hostinger phpMyAdmin SQL tab
 
+-- Create Database if not exists
+CREATE DATABASE IF NOT EXISTS `spkp_pp`;
+USE `spkp_pp`;
+
 -- Table for Magazine Editions
 CREATE TABLE IF NOT EXISTS `majalah` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
