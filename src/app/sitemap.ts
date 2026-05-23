@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/pengurus",
     "/services",
+    "/majalah-terompet",
     "/surat-keputusan",
     "/tupoksi",
   ].map((route) => ({

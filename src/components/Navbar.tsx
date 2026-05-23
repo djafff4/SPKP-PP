@@ -49,6 +49,9 @@ export default function Navbar() {
           <Link href="/services" className="text-sm font-medium text-zinc-600 hover:text-zinc-900" onClick={() => setIsOpen(false)}>
             Layanan
           </Link>
+          <Link href="/majalah-terompet" className="text-sm font-medium text-zinc-600 hover:text-zinc-900" onClick={() => setIsOpen(false)}>
+            Majalah
+          </Link>
           <Link href="/contact" className="rounded-full bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700" onClick={() => setIsOpen(false)}>
             Hubungi Kami
           </Link>

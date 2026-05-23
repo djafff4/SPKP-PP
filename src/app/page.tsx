@@ -3,29 +3,44 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <section className="flex min-h-[calc(100vh-4rem)] items-center bg-gradient-to-br from-blue-50 via-white to-zinc-50">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight text-zinc-900 sm:text-5xl md:text-6xl">
-              Bersatu untuk{" "}
-              <span className="text-blue-600">Kesejahteraan</span>
+      <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden bg-white py-24">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 z-0 opacity-40">
+          <div className="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-blue-100 blur-3xl" />
+          <div className="absolute -bottom-24 -right-24 h-96 w-96 rounded-full bg-indigo-100 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-6xl px-4 text-center sm:px-6">
+          <div className="mx-auto max-w-3xl">
+            <Link 
+              href="/majalah-terompet"
+              className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-semibold text-blue-600 transition hover:bg-blue-100 mb-8 border border-blue-100"
+            >
+              <span className="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+              Edisi Terbaru Majalah Terompet Telah Rilis!
+            </Link>
+
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-zinc-900 sm:text-5xl md:text-7xl">
+              Garda Terdepan <br />
+              <span className="text-blue-600">Kesejahteraan Bahari</span>
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-zinc-600">
-              SPKP-PP adalah wadah perjuangan bagi seluruh pekerja kelautan dan perikanan Indonesia. 
-              Kami berkomitmen memperjuangkan hak, keadilan, dan kesejahteraan anggota secara demokratis dan bermartabat.
+
+            <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-zinc-600">
+              Lembaga perjuangan yang berdedikasi tinggi dalam menegakkan supremasi hak-hak pekerja sektor kelautan dan perikanan di seluruh pelosok Indonesia.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
-                className="rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700"
+                className="rounded-full bg-blue-600 px-8 py-4 text-sm font-bold text-white shadow-lg shadow-blue-200 transition hover:bg-blue-700 hover:shadow-xl"
               >
-                Daftar Anggota
+                Gabung Sekarang
               </Link>
               <Link
                 href="/about"
-                className="rounded-full border border-zinc-300 px-6 py-3 text-sm font-medium text-zinc-700 hover:border-zinc-400 hover:bg-zinc-50"
+                className="rounded-full border border-zinc-200 bg-white px-8 py-4 text-sm font-bold text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-50"
               >
-                Pelajari Lebih
+                Tentang Kami
               </Link>
             </div>
           </div>

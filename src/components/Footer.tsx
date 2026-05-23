@@ -26,6 +26,7 @@ export default function Footer() {
               <li><a href="/tupoksi" className="hover:text-zinc-900">Tupoksi</a></li>
               <li><a href="/surat-keputusan" className="hover:text-zinc-900">Surat Keputusan</a></li>
               <li><a href="/services" className="hover:text-zinc-900">Layanan</a></li>
+              <li><a href="/majalah-terompet" className="hover:text-zinc-900">Majalah Terompet</a></li>
               <li><a href="/contact" className="hover:text-zinc-900">Kontak</a></li>
             </ul>
           </div>
