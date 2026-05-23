@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SPKP-PP (Serikat Pekerja Kelautan dan Perikanan Perisai Pancasila)
 
-## Getting Started
+Website resmi **Serikat Pekerja Kelautan dan Perikanan Perisai Pancasila (SPKP-PP)**. Platform ini dirancang untuk memperjuangkan supremasi hak-hak pekerja, mewujudkan kemandirian ekonomi, serta menjamin keadilan sosial bagi insan profesi di sektor kelautan dan perikanan Indonesia.
 
-First, run the development server:
+## ✨ Fitur Utama
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Informasi Organisasi:** Profil lengkap, visi, misi, dan struktur kepengurusan.
+- **Layanan Anggota:** Akses ke Berita Acara, Surat Keputusan, dan informasi layanan lainnya.
+- **Smart WhatsApp Chatbot:** Widget bantuan mengambang di pojok kanan bawah dengan opsi pesan terstruktur (JSON-based) untuk pendaftaran, pengaduan, dan informasi.
+- **SEO Optimized:** Dilengkapi dengan JSON-LD Schema, sitemap dinamis, dan konfigurasi robots.txt untuk visibilitas maksimal di Google Search.
+- **Responsive Design:** Dibuat menggunakan Next.js dan Tailwind CSS untuk pengalaman terbaik di semua perangkat.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Teknologi
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Framework:** [Next.js 15 (App Router)](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Bahasa:** [TypeScript](https://www.typescriptlang.org/)
+- **Fonts:** Geist (Sans & Mono)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Pengembangan Lokal
 
-## Learn More
+1. Clone repository:
+   ```bash
+   git clone https://github.com/djafff4/SPKP-PP.git
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Jalankan server pengembangan:
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. Buka [http://localhost:3000](http://localhost:3000) di browser Anda.
 
-## Deploy on Vercel
+## 📁 Struktur Proyek Utama
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `src/app/`: Routing dan halaman aplikasi.
+- `src/components/`: Komponen UI (Navbar, Footer, Chatbot, dll).
+- `public/`: Asset statis (Logo, PDF, dll).
+- `docs/nourivex/`: Dokumentasi internal dan rencana implementasi.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📞 Kontak Sekretariat
+
+- **Alamat Kantor:** Jl. Pala Barat. 8 No.1512, Griya Mejasem Baru, Mejasem Bar., Kec. Kramat, Kabupaten Tegal.
+- **Email:** dpp_spkpp@gmail.com
+- **WhatsApp:** [+62 822 9974 8232](https://wa.me/6282299748232)
+
+---
+© 2026 SPKP-PP. All rights reserved.
