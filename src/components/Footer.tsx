@@ -32,9 +32,24 @@ export default function Footer() {
           <div>
             <h4 className="mb-3 text-sm font-semibold text-zinc-900">Kontak</h4>
             <ul className="space-y-2 text-sm text-zinc-600">
-              <li>info@spkp-pp.or.id</li>
-              <li>+62 812 3456 7890</li>
-              <li>Jakarta, Indonesia</li>
+              <li>
+                <a href="mailto:dpp_spkpp@gmail.com" className="hover:text-zinc-900">
+                  dpp_spkpp@gmail.com
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://wa.me/6282299748232?text=Halo%20Admin%20SPKP-PP%2C%20saya%20ingin%20bertanya..." 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-zinc-900"
+                >
+                  +62 822 9974 8232 (WhatsApp)
+                </a>
+              </li>
+              <li className="leading-tight">
+                Jl. Pala Barat. 8 No.1512, Griya Mejasem Baru, Mejasem Bar., Kec. Kramat, Kabupaten Tegal
+              </li>
             </ul>
           </div>
         </div>
