@@ -13,7 +13,7 @@ export default function Footer() {
               </h3>
             </div>
             <p className="text-sm leading-relaxed text-zinc-600">
-              Serikat Pekerja Kelautan dan Perikanan Perisai Pancasila — memperjuangkan kesejahteraan dan keadilan bagi seluruh pekerja kelautan dan perikanan Indonesia.
+              Lembaga perjuangan buruh yang berdedikasi tinggi dalam menegakkan supremasi hak-hak pekerja, mewujudkan kemandirian ekonomi, serta menjamin keadilan sosial bagi seluruh insan profesi di sektor kelautan dan perikanan Indonesia.
             </p>
           </div>
           <div>
