@@ -19,8 +19,7 @@ interface Magazine {
 
 async function getMagazines() {
   try {
-    // We cast to any here to avoid importing types from mysql2 in this file
-    const [rows] = await pool.query("SELECT * FROM majalah ORDER BY release_date DESC") as any;
+    const [rows] = await pool.query("SELECT * FROM majalah ORDER BY release_date DESC");
     return rows as Magazine[];
   } catch (error) {
     console.error("Database error:", error);
