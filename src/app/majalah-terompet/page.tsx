@@ -1,39 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import pool from "@/lib/db";
+import { RowDataPacket } from "mysql2";
 
 export const metadata: Metadata = {
   title: "Majalah Terompet | SPKP-PP",
   description: "Arsip digital Majalah Terompet, media informasi dan aspirasi Serikat Pekerja Kelautan dan Perikanan Perisai Pancasila.",
 };
 
-const MAGAZINES = [
-  {
-    id: 1,
-    title: "Majalah Terompet - Edisi Mei 2026",
-    description: "Fokus Utama: Memperkuat Sinergi Buruh Kelautan di Era Digital.",
-    date: "Mei 2026",
-    image: "/logo.jpeg",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Majalah Terompet - Edisi April 2026",
-    description: "Evaluasi Kebijakan Kesejahteraan Pekerja Perikanan Semester I.",
-    date: "April 2026",
-    image: "/logo.jpeg",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Majalah Terompet - Edisi Maret 2026",
-    description: "Refleksi Perjuangan Hak-Hak Normatif di Sektor Kelautan.",
-    date: "Maret 2026",
-    image: "/logo.jpeg",
-    link: "#",
-  },
-];
+interface Magazine extends RowDataPacket {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  cover_image: string;
+  release_date: Date;
+  file_url: string;
+}
 
-export default function MagazinePage() {
+async function getMagazines() {
+  try {
+    const [rows] = await pool.query<Magazine[]>("SELECT * FROM majalah ORDER BY release_date DESC");
+    return rows;
+  } catch (error) {
+    console.error("Database error:", error);
+    return [];
+  }
+}
+
+export default async function MagazinePage() {
+  const magazines = await getMagazines();
+
   return (
     <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
       <div className="max-w-3xl">
@@ -43,38 +40,52 @@ export default function MagazinePage() {
         </p>
       </div>
 
-      <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {MAGAZINES.map((mag) => (
-          <div
-            key={mag.id}
-            className="group overflow-hidden rounded-2xl border border-zinc-200 bg-white transition hover:border-blue-200 hover:shadow-lg"
-          >
-            <div className="aspect-[3/4] overflow-hidden bg-zinc-100">
-              <div className="flex h-full items-center justify-center text-zinc-400 group-hover:scale-105 transition-transform duration-300">
-                <span className="text-sm">Cover Majalah</span>
+      {magazines.length === 0 ? (
+        <div className="mt-16 text-center py-20 border-2 border-dashed border-zinc-200 rounded-3xl">
+          <p className="text-zinc-500 italic">Belum ada edisi majalah yang diterbitkan atau sedang dalam pemeliharaan database.</p>
+        </div>
+      ) : (
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {magazines.map((mag) => (
+            <div
+              key={mag.id}
+              className="group overflow-hidden rounded-2xl border border-zinc-200 bg-white transition hover:border-blue-200 hover:shadow-lg"
+            >
+              <div className="aspect-[3/4] overflow-hidden bg-zinc-100 relative">
+                <div className="flex h-full items-center justify-center text-zinc-400 group-hover:scale-105 transition-transform duration-300">
+                  <span className="text-sm">Cover Majalah</span>
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider">
+                  {new Date(mag.release_date).toLocaleDateString("id-ID", { month: "long", year: "numeric" })}
+                </div>
+                <h3 className="mt-2 text-xl font-bold text-zinc-900 group-hover:text-blue-600 transition-colors">
+                  {mag.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-zinc-600 line-clamp-2">
+                  {mag.description}
+                </p>
+                <div className="mt-6 flex items-center justify-between">
+                  <Link
+                    href={`/majalah-terompet/${mag.slug}`}
+                    className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+                  >
+                    Baca Selengkapnya
+                  </Link>
+                  {mag.file_url && (
+                    <a href={mag.file_url} download className="text-zinc-400 hover:text-zinc-600 transition-colors">
+                      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                      </svg>
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="p-6">
-              <div className="text-xs font-semibold text-blue-600 uppercase tracking-wider">{mag.date}</div>
-              <h3 className="mt-2 text-xl font-bold text-zinc-900 group-hover:text-blue-600 transition-colors">
-                {mag.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-zinc-600">
-                {mag.description}
-              </p>
-              <Link
-                href={mag.link}
-                className="mt-6 inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700"
-              >
-                Baca Selengkapnya
-                <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
