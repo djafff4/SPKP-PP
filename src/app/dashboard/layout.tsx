@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  Wallet, 
-  BookOpen, 
+import {
+  LayoutDashboard,
+  Wallet,
+  BookOpen,
   LogOut,
   Menu,
-  X
+  X,
+  ExternalLink,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -27,68 +28,111 @@ export default function DashboardLayout({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-zinc-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Sidebar - Desktop */}
-      <aside className="fixed left-0 top-0 hidden h-full w-64 border-r border-zinc-200 bg-white lg:block">
-        <div className="flex h-16 items-center border-b border-zinc-200 px-6">
+      <aside className="fixed left-0 top-0 hidden h-full w-64 flex-col bg-slate-900 lg:flex">
+        {/* Brand */}
+        <div className="flex h-16 shrink-0 items-center border-b border-slate-800 px-6">
           <Link href="/dashboard" className="flex items-center gap-2">
-            <span className="text-xl font-bold tracking-tight text-zinc-900">
-              Admin<span className="text-blue-600">SPKP</span>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-600">
+              <LayoutDashboard className="h-4 w-4 text-white" />
+            </div>
+            <span className="text-base font-bold tracking-tight text-white">
+              Admin<span className="text-blue-400">SPKP</span>
             </span>
           </Link>
         </div>
-        <nav className="space-y-1 p-4">
+
+        {/* Nav */}
+        <nav className="flex-1 space-y-1 overflow-y-auto p-4">
+          <p className="mb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            Menu Utama
+          </p>
           {NAV_ITEMS.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
+            const isActive =
+              pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive 
-                    ? "bg-blue-50 text-blue-600" 
-                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+                  isActive
+                    ? "border border-blue-500/30 bg-blue-600/20 text-blue-300"
+                    : "text-slate-400 hover:bg-slate-800 hover:text-slate-100"
                 }`}
               >
-                <item.icon className="h-5 w-5" />
+                <item.icon
+                  className={`h-4 w-4 ${
+                    isActive ? "text-blue-400" : "text-slate-500"
+                  }`}
+                />
                 {item.name}
+                {isActive && (
+                  <span className="ml-auto h-1.5 w-1.5 rounded-full bg-blue-400" />
+                )}
               </Link>
             );
           })}
         </nav>
-        <div className="absolute bottom-0 w-full border-t border-zinc-200 p-4">
+
+        {/* Footer */}
+        <div className="shrink-0 border-t border-slate-800 p-4 space-y-1">
           <Link
             href="/"
-            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-red-50 hover:text-red-600 transition-colors"
+            target="_blank"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-400 transition hover:bg-slate-800 hover:text-slate-100"
           >
-            <LogOut className="h-5 w-5" />
-            Keluar ke Web
+            <ExternalLink className="h-4 w-4 text-slate-500" />
+            Lihat Website
+          </Link>
+          <Link
+            href="/"
+            className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-400 transition hover:bg-red-900/30 hover:text-red-400"
+          >
+            <LogOut className="h-4 w-4 text-slate-500" />
+            Keluar
           </Link>
         </div>
       </aside>
 
       {/* Header - Mobile */}
-      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-zinc-200 bg-white px-4 lg:hidden">
+      <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-4 shadow-sm lg:hidden">
         <Link href="/dashboard" className="flex items-center gap-2">
-          <span className="text-lg font-bold tracking-tight text-zinc-900">
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-600">
+            <LayoutDashboard className="h-4 w-4 text-white" />
+          </div>
+          <span className="text-base font-bold tracking-tight text-slate-900">
             Admin<span className="text-blue-600">SPKP</span>
           </span>
         </Link>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 text-zinc-600 hover:text-zinc-900"
+          className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100"
         >
-          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {isMobileMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </header>
 
       {/* Sidebar - Mobile */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
-          <nav className="fixed bottom-0 top-0 left-0 w-64 bg-white p-4 shadow-xl">
-            <div className="mb-8 flex h-8 items-center border-b border-zinc-100 pb-4">
-               <span className="text-lg font-bold">Menu Navigasi</span>
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <nav className="fixed bottom-0 left-0 top-0 w-64 bg-slate-900 p-4 shadow-2xl">
+            <div className="mb-6 flex h-8 items-center justify-between">
+              <span className="text-sm font-bold text-slate-100">Menu Navigasi</span>
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-slate-400 hover:text-slate-100"
+              >
+                <X className="h-5 w-5" />
+              </button>
             </div>
             <div className="space-y-1">
               {NAV_ITEMS.map((item) => (
@@ -96,11 +140,13 @@ export default function DashboardLayout({
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
-                    pathname === item.href ? "bg-blue-50 text-blue-600" : "text-zinc-600 hover:bg-zinc-100"
+                  className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+                    pathname === item.href
+                      ? "bg-blue-600/20 text-blue-300"
+                      : "text-slate-400 hover:bg-slate-800 hover:text-slate-100"
                   }`}
                 >
-                  <item.icon className="h-5 w-5" />
+                  <item.icon className="h-4 w-4" />
                   {item.name}
                 </Link>
               ))}
@@ -111,9 +157,7 @@ export default function DashboardLayout({
 
       {/* Main Content */}
       <main className="lg:pl-64">
-        <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">
-          {children}
-        </div>
+        <div className="mx-auto max-w-7xl p-4 sm:p-6 lg:p-8">{children}</div>
       </main>
     </div>
   );

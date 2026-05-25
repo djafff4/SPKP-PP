@@ -1,127 +1,170 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Tupoksi | SPKP-PP",
-};
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
-const data = [
+const TUPOKSI_DATA = [
   {
-    jabatan: "Ketua Umum",
-    tugas: [
+    role: "Ketua Umum",
+    tugasPokok: [
       "Memimpin organisasi secara nasional",
       "Menentukan arah kebijakan strategis",
-      "Menjadi penanggung jawab utama organisasi",
+      "Menjadi penanggung jawab utama organisasi"
     ],
     fungsi: [
       "Pengambil keputusan tertinggi di luar Munas",
       "Representasi organisasi (ke pemerintah, perusahaan, publik)",
-      "Penandatangan keputusan & dokumen resmi",
-    ],
+      "Penandatangan keputusan & dokumen resmi"
+    ]
   },
   {
-    jabatan: "Wakil Ketua Umum",
-    tugas: [
-      "Membantu Ketua Umum dalam menjalankan organisasi",
+    role: "Wakil Ketua Umum",
+    tugasPokok: [
+      "Membantu Ketua Umum dalam menjalankan organisasi"
     ],
     fungsi: [
       "Mengkoordinasikan bidang/divisi",
       "Menggantikan Ketua Umum saat berhalangan",
-      "Mengawasi pelaksanaan program kerja",
-    ],
+      "Mengawasi pelaksanaan program kerja"
+    ]
   },
   {
-    jabatan: "Sekretaris Jenderal",
-    tugas: [
-      "Mengelola administrasi dan operasional organisasi",
+    role: "Sekretaris Jenderal",
+    tugasPokok: [
+      "Mengelola administrasi dan operasional organisasi"
     ],
     fungsi: [
       "Mengatur surat-menyurat & dokumentasi",
       "Menyusun program kerja organisasi",
       "Mengelola rapat dan notulen",
-      "Mengkoordinasikan komunikasi internal",
-    ],
+      "Mengkoordinasikan komunikasi internal"
+    ]
   },
   {
-    jabatan: "Bendahara Umum",
-    tugas: [
-      "Mengelola keuangan organisasi",
+    role: "Bendahara Umum",
+    tugasPokok: [
+      "Mengelola keuangan organisasi"
     ],
-    fungsi: [],
+    fungsi: [
+      "Mengelola pemasukan & pengeluaran",
+      "Membuat laporan keuangan berkala",
+      "Menyusun anggaran (RAPBO)",
+      "Menjaga transparansi & akuntabilitas"
+    ]
   },
   {
-    jabatan: "Bidang Kesejahteraan Anggota",
-    tugas: [
+    role: "Bidang Organisasi & Keanggotaan",
+    tupoksi: [
+      "Mengelola data anggota",
+      "Membentuk struktur daerah/cabang",
+      "Rekrutmen & kaderisasi anggota",
+      "Penerbitan kartu anggota"
+    ]
+  },
+  {
+    role: "Bidang Advokasi",
+    tupoksi: [
+      "Pendampingan kasus PHK & sengketa",
+      "Konsultasi hukum ketenagakerjaan",
+      "Mewakili anggota di PHI",
+      "Penyusunan kajian hukum"
+    ]
+  },
+  {
+    role: "Bidang Hubungan Industrial",
+    tupoksi: [
+      "Perundingan PKB",
+      "Mediasi dengan perusahaan",
+      "Penguatan hubungan pekerja-pengusaha",
+      "Monitoring kondisi kerja"
+    ]
+  },
+  {
+    role: "Bidang Pendidikan & Pelatihan (Diklat)",
+    tupoksi: [
+      "Pelatihan anggota (hak pekerja, hukum, dll)",
+      "Pendidikan kader serikat",
+      "Workshop & seminar",
+      "Pengembangan SDM anggota"
+    ]
+  },
+  {
+    role: "Bidang Kesejahteraan Anggota",
+    tupoksi: [
       "Program kesejahteraan (bantuan sosial, koperasi, dll)",
       "Perlindungan jaminan sosial tenaga kerja",
-      "Pengembangan ekonomi anggota",
-    ],
-    fungsi: [],
+      "Pengembangan ekonomi anggota"
+    ]
   },
   {
-    jabatan: "Bidang Informasi & Komunikasi",
-    tugas: [
+    role: "Bidang Informasi & Komunikasi",
+    tupoksi: [
       "Publikasi kegiatan organisasi",
-      "Pengelolaan media sosial",
+      "Pengelolaan media social",
       "Penyebaran informasi ke anggota",
-      "Hubungan media & publik",
-    ],
-    fungsi: [],
-  },
+      "Hubungan media & publik"
+    ]
+  }
 ];
 
-export default function Tupoksi() {
+export default function TupoksiPage() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
-    <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-      <div className="max-w-3xl">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-900">
-          Tugas Pokok & Fungsi
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-zinc-600">
-          Tupoksi pengurus Dewan Pimpinan Pusat (DPP) SPKP-PP.
-        </p>
-      </div>
+    <div className="min-h-screen bg-white pt-24 pb-20">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6">
+        <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 text-center">Tugas Pokok & Fungsi</h1>
+        <p className="text-slate-600 text-center mb-12">Rincian tugas pokok dan fungsi (Tupoksi) masing-masing jabatan dalam struktur kepengurusan SPKP-PP.</p>
 
-      <div className="mt-12 space-y-8">
-        {data.map((item) => (
-          <div
-            key={item.jabatan}
-            className="rounded-2xl border border-zinc-200 p-6 sm:p-8"
-          >
-            <h2 className="text-xl font-bold text-blue-600">{item.jabatan}</h2>
-
-            {item.tugas.length > 0 && (
-              <div className="mt-4">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">
-                  Tugas Pokok
-                </h3>
-                <ul className="mt-2 space-y-1.5">
-                  {item.tugas.map((t) => (
-                    <li key={t} className="flex gap-2 text-zinc-700">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500" />
-                      {t}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {item.fungsi.length > 0 && (
-              <div className="mt-4">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">
-                  Fungsi
-                </h3>
-                <ul className="mt-2 space-y-1.5">
-                  {item.fungsi.map((f) => (
-                    <li key={f} className="flex gap-2 text-zinc-700">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        ))}
+        <div className="space-y-4">
+          {TUPOKSI_DATA.map((item, index) => (
+            <div 
+              key={index} 
+              className={`border rounded-xl overflow-hidden transition-colors ${openIndex === index ? 'border-blue-200 bg-blue-50/30' : 'border-slate-200 bg-white'}`}
+            >
+              <button
+                className="w-full flex items-center justify-between p-5 text-left font-semibold text-slate-900 hover:bg-slate-50 transition-colors"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+              >
+                <span className="text-lg">{item.role}</span>
+                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openIndex === index ? 'rotate-180 text-blue-600' : ''}`} />
+              </button>
+              {openIndex === index && (
+                <div className="p-5 pt-0 text-slate-600 border-t border-blue-100/50">
+                  {item.tugasPokok && (
+                    <div className="mt-4">
+                      <h4 className="font-semibold text-slate-900 mb-2">Tugas Pokok:</h4>
+                      <ol className="list-decimal pl-5 space-y-1">
+                        {item.tugasPokok.map((task, i) => (
+                          <li key={i}>{task}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                  {item.fungsi && (
+                    <div className="mt-4">
+                      <h4 className="font-semibold text-slate-900 mb-2">Fungsi:</h4>
+                      <ol className="list-decimal pl-5 space-y-1">
+                        {item.fungsi.map((task, i) => (
+                          <li key={i}>{task}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                  {item.tupoksi && (
+                    <div className="mt-4">
+                      <ol className="list-decimal pl-5 space-y-1">
+                        {item.tupoksi.map((task, i) => (
+                          <li key={i}>{task}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
